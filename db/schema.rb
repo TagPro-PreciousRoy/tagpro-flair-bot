@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131201210643) do
+ActiveRecord::Schema.define(version: 20131201212901) do
 
   create_table "users", force: true do |t|
     t.integer  "sign_in_count",      default: 0, null: false
@@ -21,6 +21,11 @@ ActiveRecord::Schema.define(version: 20131201210643) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
   end
+
+  add_index "users", ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
 
 end
