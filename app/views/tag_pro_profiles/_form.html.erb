@@ -1,0 +1,25 @@
+<%= form_for @tag_pro_profile, url: tag_pro_profile_path do |f| %>
+  <% if @tag_pro_profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tag_pro_profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+      <ul>
+      <% @tag_pro_profile.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :server %><br>
+    <%= f.text_field :server %>
+  </div>
+  <div class="field">
+    <%= f.label :uid %><br>
+    <%= f.text_field :uid %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
