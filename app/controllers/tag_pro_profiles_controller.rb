@@ -44,7 +44,7 @@ class TagProProfilesController < ApplicationController
   # DELETE /tag_pro_profile.json
   def destroy
     @tag_pro_profile.destroy
-    respond_with(@tag_pro_profile, location: tag_pro_profile_url)
+    respond_with(@tag_pro_profile, location: new_tag_pro_profile_url)
   end
 
 private
