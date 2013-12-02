@@ -7,5 +7,5 @@ one:
 
 two:
   user_id: 
-  server: MyString
-  uid: MyString
+  server: MyString2
+  uid: MyString2
