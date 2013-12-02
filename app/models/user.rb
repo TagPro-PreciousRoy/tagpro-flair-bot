@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   validates :uid, uniqueness: { scope: :provider }
 
+  has_one :tag_pro_profile
+
   def self.find_or_create_for_oauth(auth)
     find_or_create_by provider: auth.provider, uid: auth.uid do |user|
       user.name = auth.extra.raw_info.name

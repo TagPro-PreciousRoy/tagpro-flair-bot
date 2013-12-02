@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131201212901) do
+ActiveRecord::Schema.define(version: 20131202021610) do
+
+  create_table "tag_pro_profiles", force: true do |t|
+    t.integer  "user_id"
+    t.string   "server"
+    t.string   "uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tag_pro_profiles", ["server", "uid"], name: "index_tag_pro_profiles_on_server_and_uid", unique: true
+  add_index "tag_pro_profiles", ["user_id"], name: "index_tag_pro_profiles_on_user_id", unique: true
 
   create_table "users", force: true do |t|
     t.integer  "sign_in_count",      default: 0, null: false
