@@ -55,6 +55,6 @@ private
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def tag_pro_profile_params
-    params.require(:tag_pro_profile).permit(:server, :uid)
+    params.require(:tag_pro_profile).permit(:url)
   end
 end
