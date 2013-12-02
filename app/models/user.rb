@@ -5,4 +5,10 @@ class User < ActiveRecord::Base
   devise :omniauthable, omniauth_providers: [:reddit]
 
   validates :uid, uniqueness: { scope: :provider }
+
+  def self.find_or_create_for_oauth(auth)
+    find_or_create_by provider: auth.provider, uid: auth.uid do |user|
+      user.name = auth.extra.raw_info.name
+    end
+  end
 end
