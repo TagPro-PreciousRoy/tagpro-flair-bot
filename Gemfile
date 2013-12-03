@@ -56,5 +56,6 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'devise'
+gem 'mechanize'
 gem 'omniauth'
 gem 'omniauth-reddit', github: 'jackdempsey/omniauth-reddit'
