@@ -7,6 +7,10 @@ class Flair
     end
   end
 
+  def position_for_css
+    position.map { |c| "#{c}px" }.join(' ')
+  end
+
   def flair_class
     case position
     when [-16, -16]
