@@ -4,6 +4,7 @@ class TagProProfile < ActiveRecord::Base
   validates :user_id, uniqueness: true
   validates :uid, uniqueness: { scope: :server }, presence: true
   validates :server, presence: true
+  validate :flair_page_must_work
 
   URL_REGEX = /\Ahttp:\/\/tagpro-([a-z]+).koalabeast.com\/profile\/([\da-f]{24})\z/
 
@@ -29,6 +30,15 @@ class TagProProfile < ActiveRecord::Base
       end
     rescue
       nil
+    end
+  end
+
+  def flair_page_must_work
+    page = flair_page
+    if page.nil?
+      errors.add(:url, "couldn't be processed")
+    elsif page.code == "302"
+      errors.add(:url, "doesn't exist")
     end
   end
 end
