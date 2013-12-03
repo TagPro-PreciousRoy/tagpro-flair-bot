@@ -41,4 +41,6 @@ class TagProProfile < ActiveRecord::Base
       errors.add(:url, "doesn't exist")
     end
   end
+
+  delegate :flairs, to: :flair_page
 end
