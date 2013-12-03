@@ -17,4 +17,18 @@ class TagProProfile < ActiveRecord::Base
       self.uid = $2
     end
   end
+
+  def flair_page
+    @flair_page ||= begin
+      Rails.cache.fetch([self, :flair_page]) do
+        agent = Mechanize.new
+        agent.follow_redirect = false
+        page = agent.get(url)
+        raise unless page.code =~ /\A[234]/
+        FlairPage.new(code: page.code, content: page.content)
+      end
+    rescue
+      nil
+    end
+  end
 end
