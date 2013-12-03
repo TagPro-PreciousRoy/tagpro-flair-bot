@@ -1,2 +1,48 @@
-<h1>Static#index</h1>
-<p>Find me in app/views/static/index.html.erb</p>
+<h1>/r/TagPro Bot</h1>
+<p>From here you can set your flair on /r/TagPro.</p>
+
+<h2>Step 1</h2>
+<em>Authenticate with reddit</em>
+<% if current_user %>
+  <p>You are authenticated as <%= current_user.name %>.</p>
+<% else %>
+  <p><%= link_to "Link your reddit account", user_omniauth_authorize_path(:reddit) %> to begin.</p>
+<% end %>
+
+<h2>Step 2</h2>
+<em>Link your TagPro account.</em>
+<% if current_user %>
+  <% if current_user.tag_pro_profile && current_user.tag_pro_profile.persisted? %>
+    <p>You linked <%= link_to "#{current_user.tag_pro_profile.name} on #{current_user.tag_pro_profile.server}", current_user.tag_pro_profile.url %>.</p>
+  <% else %>
+    <% @tag_pro_profile = current_user.tag_pro_profile || current_user.build_tag_pro_profile %>
+    <%= render 'tag_pro_profiles/form' %>
+  <% end %>
+<% end %>
+
+<h2>Step 3</h2>
+<em>Choose your flair</em>
+<% if current_user && current_user.tag_pro_profile && current_user.tag_pro_profile.persisted? %>
+  <% if current_user.tag_pro_profile.flairs.blank? %>
+    <p>You don't have any flairs.</p>
+  <% else %>
+    <%= form_for current_user do |f| %>
+      <div class="field">
+        <%= f.collection_radio_buttons :flair_class, current_user.tag_pro_profile.flairs, :flair_class, :description, include_blank: true do |b| %>
+          <%= b.label do %>
+            <%= b.radio_button %>
+            <div class="flair" style="background-image: url(http://tagpro-<%= current_user.tag_pro_profile.server %>.koalabeast.com/images/flair.png); background-position: <%= b.object.position_for_css %>;"></div>
+            <%= b.text %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="field">
+        <%= f.label :flair_text %><br>
+        <%= f.text_field :flair_text, value: "#{current_user.name} // #{current_user.tag_pro_profile.server.humanize}" %>
+      </div>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

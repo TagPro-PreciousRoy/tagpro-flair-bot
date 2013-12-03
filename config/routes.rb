@@ -3,6 +3,8 @@ TagProBot::Application.routes.draw do
     resources :flairs
   end
 
+  resource :user
+
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   root to: 'static#index'
