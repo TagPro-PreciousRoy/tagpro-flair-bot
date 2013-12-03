@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131202021610) do
+ActiveRecord::Schema.define(version: 20131203220623) do
 
   create_table "tag_pro_profiles", force: true do |t|
     t.integer  "user_id"
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 20131202021610) do
     t.string   "provider"
     t.string   "uid"
     t.string   "name"
+    t.string   "flair_class"
+    t.string   "flair_text"
   end
 
   add_index "users", ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true

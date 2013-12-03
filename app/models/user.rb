@@ -4,8 +4,6 @@ class User < ActiveRecord::Base
   devise :trackable
   devise :omniauthable, omniauth_providers: [:reddit]
 
-  attr_accessor :flair_class, :flair_text
-
   validates :uid, uniqueness: { scope: :provider }
 
   has_one :tag_pro_profile, dependent: :destroy
