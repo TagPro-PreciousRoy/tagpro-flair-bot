@@ -1,5 +1,7 @@
 TagProBot::Application.routes.draw do
-  resource :tag_pro_profile
+  resource :tag_pro_profile do
+    resources :flairs
+  end
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
