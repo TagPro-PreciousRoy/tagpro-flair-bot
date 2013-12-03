@@ -19,4 +19,8 @@ class FlairPage
       Flair.new(description: description, position: position)
     end
   end
+
+  def name
+    root.search("h3").first.try(:text)
+  end
 end
