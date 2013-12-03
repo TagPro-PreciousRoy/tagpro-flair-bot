@@ -38,7 +38,7 @@
       </div>
       <div class="field">
         <%= f.label :flair_text %><br>
-        <%= f.text_field :flair_text, value: "#{current_user.name} // #{current_user.tag_pro_profile.server.humanize}" %>
+        <%= f.text_field :flair_text, value: current_user.flair_text || "#{current_user.name} // #{current_user.tag_pro_profile.server.humanize}" %>
       </div>
       <div class="actions">
         <%= f.submit %>
