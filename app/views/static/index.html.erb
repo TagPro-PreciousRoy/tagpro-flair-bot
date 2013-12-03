@@ -26,7 +26,7 @@
   <% if current_user.tag_pro_profile.flairs.blank? %>
     <p>You don't have any flairs.</p>
   <% else %>
-    <%= form_for current_user do |f| %>
+    <%= form_for current_user, url: user_path do |f| %>
       <div class="field">
         <%= f.collection_radio_buttons :flair_class, current_user.tag_pro_profile.flairs, :flair_class, :description, include_blank: true do |b| %>
           <%= b.label do %>
