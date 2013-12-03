@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class TagProProfilesControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @user = users(:one)
     sign_in :user, @user
