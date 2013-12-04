@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   devise :omniauthable, omniauth_providers: [:reddit]
 
   validates :uid, uniqueness: { scope: :provider }
-  validates :flair_class, inclusion: { in: lambda { |user| user.tag_pro_profile.flairs.map(&:flair_class) }, allow_blank: true }
+  validates :flair_class, inclusion: { in: lambda { |user| user.tag_pro_profile.flairs.map(&:flair_class) rescue [] }, allow_blank: true }
 
   has_one :tag_pro_profile, dependent: :destroy
 
