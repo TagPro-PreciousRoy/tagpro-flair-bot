@@ -6,6 +6,9 @@ TagProBot::Application.routes.draw do
   resource :user
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_scope :user do
+    delete '/users/sign_out(.:format)', to: 'devise/sessions#destroy', as: :destroy_user_session
+  end
 
   root to: 'static#index'
 
