@@ -5,10 +5,15 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    if @user.update(user_params)
-      flash[:notice] = 'User was successfully updated.' if is_navigational_format?
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html { redirect_to root_url, notice: 'User was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render template: 'static/index' }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
-    respond_with(@user, location: root_url)
   end
 
 private
