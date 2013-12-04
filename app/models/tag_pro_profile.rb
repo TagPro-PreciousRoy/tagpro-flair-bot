@@ -8,6 +8,13 @@ class TagProProfile < ActiveRecord::Base
 
   URL_REGEX = /\A(?:http:\/\/)?tagpro-([a-z]+).koalabeast.com\/profile\/([\da-f]{24})\z/
 
+  after_destroy :destroy_user_class
+  after_save :update_user_class, on: :update
+
+  def update_user_class
+    user.update_attributes flair_class: nil if destroyed? || !flairs.map(&:flair_class).include?(user.flair_class)
+  end
+
   def url
     "http://tagpro-#{server}.koalabeast.com/profile/#{uid}" if server && uid
   end
