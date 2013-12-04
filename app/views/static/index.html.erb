@@ -4,7 +4,7 @@
 <h2>Step 1</h2>
 <em>Authenticate with reddit</em>
 <% if current_user %>
-  <p>You are authenticated as <%= current_user.name %>.</p>
+  <p>You are authenticated as <%= link_to current_user.name, "http://www.reddit.com/user/#{current_user.name}" %>.</p>
 <% else %>
   <p><%= link_to "Link your reddit account", user_omniauth_authorize_path(:reddit) %> to begin.</p>
 <% end %>
