@@ -28,7 +28,7 @@ class TagProProfilesController < ApplicationController
     if @tag_pro_profile.save
       flash[:notice] = 'Tag pro profile was successfully created.' if is_navigational_format?
     end
-    respond_with(@tag_pro_profile, location: tag_pro_profile_url)
+    respond_with(@tag_pro_profile, location: root_url)
   end
 
   # PATCH/PUT /tag_pro_profile
@@ -37,14 +37,14 @@ class TagProProfilesController < ApplicationController
     if @tag_pro_profile.update(tag_pro_profile_params)
       flash[:notice] = 'Tag pro profile was successfully updated.' if is_navigational_format?
     end
-    respond_with(@tag_pro_profile, location: tag_pro_profile_url)
+    respond_with(@tag_pro_profile, location: root_url)
   end
 
   # DELETE /tag_pro_profile
   # DELETE /tag_pro_profile.json
   def destroy
     @tag_pro_profile.destroy
-    respond_with(@tag_pro_profile, location: new_tag_pro_profile_url)
+    respond_with(@tag_pro_profile, location: root_url)
   end
 
 private
