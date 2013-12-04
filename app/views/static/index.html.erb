@@ -5,6 +5,7 @@
 <em>Authenticate with reddit</em>
 <% if current_user %>
   <p>You are authenticated as <%= link_to current_user.name, "http://www.reddit.com/user/#{current_user.name}" %>.</p>
+  <p><%= link_to 'log out', destroy_user_session_path, method: :delete %></p>
 <% else %>
   <p><%= link_to 'Link your reddit account', user_omniauth_authorize_path(:reddit) %> to begin.</p>
 <% end %>
@@ -14,6 +15,7 @@
 <% if current_user %>
   <% if current_user.tag_pro_profile && current_user.tag_pro_profile.persisted? %>
     <p>You linked <%= link_to "#{current_user.tag_pro_profile.name} on #{current_user.tag_pro_profile.server.humanize}", current_user.tag_pro_profile.url %>.</p>
+    <p><%= link_to 'unlink your account', tag_pro_profile_path, method: :delete %></p>
   <% else %>
     <em>Copy your profile URL. It looks like http://tagpro-{server}.koalabeast.com/profile/{id}.</em>
     <% @tag_pro_profile = current_user.tag_pro_profile || current_user.build_tag_pro_profile %>
