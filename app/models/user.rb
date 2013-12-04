@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   end
 
   def flair_set?
-    flair_class || flair_text
+    flair_class? || flair_text?
   end
 
   def write_flair_to_reddit
