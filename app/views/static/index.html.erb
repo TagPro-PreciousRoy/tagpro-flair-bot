@@ -34,7 +34,7 @@
         <%= f.collection_radio_buttons :flair_class, current_user.tag_pro_profile.flairs, :flair_class, :description do |b| %>
           <%= b.label do %>
             <%= b.radio_button %>
-            <div class="flair" style="background-image: url(http://tagpro-<%= current_user.tag_pro_profile.server %>.koalabeast.com/images/flair.png); background-position: <%= b.object.position_for_css %>;"></div>
+            <div class="flair" style="background-position: <%= b.object.position_for_css %>;"></div>
             <%= b.text %>
           <% end %>
           <br>
