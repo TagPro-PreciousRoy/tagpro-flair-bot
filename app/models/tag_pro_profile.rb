@@ -6,7 +6,7 @@ class TagProProfile < ActiveRecord::Base
   validates :server, presence: true
   validate :flair_page_must_work
 
-  URL_REGEX = /\Ahttp:\/\/tagpro-([a-z]+).koalabeast.com\/profile\/([\da-f]{24})\z/
+  URL_REGEX = /\A(?:http:\/\/)?tagpro-([a-z]+).koalabeast.com\/profile\/([\da-f]{24})\z/
 
   def url
     "http://tagpro-#{server}.koalabeast.com/profile/#{uid}" if server && uid
