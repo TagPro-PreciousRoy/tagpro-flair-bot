@@ -8,7 +8,7 @@ class TagProProfile < ActiveRecord::Base
 
   URL_REGEX = /\A(?:http:\/\/)?tagpro-([a-z]+).koalabeast.com\/profile\/([\da-f]{24})\z/
 
-  after_destroy :destroy_user_class
+  after_destroy :update_user_class
   after_save :update_user_class, on: :update
 
   def update_user_class
