@@ -56,6 +56,7 @@ gem 'puma'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'dalli'
 gem 'devise'
 gem 'mechanize'
 gem 'omniauth'
