@@ -14,6 +14,7 @@ end
 group :production do
   gem 'pg'
 
+  gem 'memcachier'
   gem 'rails_12factor'
 end
 
