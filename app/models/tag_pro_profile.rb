@@ -33,13 +33,11 @@ class TagProProfile < ActiveRecord::Base
 
   def flair_page
     @flair_page ||= begin
-      Rails.cache.fetch([self, :flair_page]) do
-        agent = Mechanize.new
-        agent.follow_redirect = false
-        page = agent.get(url)
-        raise unless page.code =~ /\A[234]/
-        FlairPage.new(code: page.code, content: page.content)
-      end
+      agent = Mechanize.new
+      agent.follow_redirect = false
+      page = agent.get(url)
+      raise unless page.code =~ /\A[234]/
+      FlairPage.new(code: page.code, content: page.content)
     rescue
       nil
     end
@@ -71,7 +69,6 @@ class TagProProfile < ActiveRecord::Base
     return false unless confirmation_token.present?
 
     @flair_page = nil
-    Rails.cache.clear([self, :flair_page])
 
     if display_name.include? confirmation_token
       update_attributes confirmed_at: Time.now
