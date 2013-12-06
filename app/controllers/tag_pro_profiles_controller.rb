@@ -48,7 +48,11 @@ class TagProProfilesController < ApplicationController
   end
 
   def verify
-    @tag_pro_profile.verify!
+    if @tag_pro_profile.verify!
+      flash[:notice] = 'Tag pro profile was successfully verified.' if is_navigational_format?
+    else
+      flash[:alert] = "We couldn't verify your profile. Be sure to set 'My Display Name' to '#{current_user.tag_pro_profile.name_with_token}'." if is_navigational_format?
+    end
     respond_with(@tag_pro_profile, location: root_url)
   end
 
