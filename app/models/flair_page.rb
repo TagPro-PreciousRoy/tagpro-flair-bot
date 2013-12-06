@@ -23,4 +23,11 @@ class FlairPage
   def name
     root.search("h3").first.try(:text)
   end
+
+  def display_name
+    title = root.search('title').first
+    return nil unless title
+    return nil unless title.text =~ /\ATagPro Ball: (.*)\z/
+    $1
+  end
 end

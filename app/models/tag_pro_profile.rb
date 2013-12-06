@@ -51,4 +51,5 @@ class TagProProfile < ActiveRecord::Base
 
   delegate :flairs, to: :flair_page
   delegate :name, to: :flair_page
+  delegate :display_name, to: :flair_page
 end
