@@ -15,9 +15,19 @@
 <% if current_user %>
   <% if current_user.tag_pro_profile && current_user.tag_pro_profile.persisted? %>
     <p>You linked <%= link_to "#{current_user.tag_pro_profile.name} on #{current_user.tag_pro_profile.server.humanize}", current_user.tag_pro_profile.url %>.</p>
+    <% if current_user.tag_pro_profile.confirmed? %>
+      <p>You can change your display name back now.</p>
+    <% else %>
+      <p>You must confirm that you own this profile. To do so, visit <%= link_to 'your profile', current_user.tag_pro_profile.url %> and change "My Displayed Name" to <%= current_user.tag_pro_profile.name_with_token %>. Once you are verified, you can change your name back.</p>
+      <%= form_for current_user.tag_pro_profile, url: verify_tag_pro_profile_path, method: :patch do |f| %>
+        <div class="actions">
+          <%= f.submit 'Verify Me' %>
+        </div>
+      <% end %>
+    <% end %>
     <p><%= link_to 'unlink your account', tag_pro_profile_path, method: :delete %></p>
   <% else %>
-    <em>Copy your profile URL. It looks like http://tagpro-{server}.koalabeast.com/profile/{id}.</em>
+    <p><em>Copy your profile URL. It looks like http://tagpro-{server}.koalabeast.com/profile/{id}. You will be required to confirm ownership of the profile.</em></p>
     <% @tag_pro_profile = current_user.tag_pro_profile || current_user.build_tag_pro_profile %>
     <%= render 'tag_pro_profiles/form' %>
   <% end %>
@@ -25,7 +35,7 @@
 
 <h2>Step 3</h2>
 <em>Choose your flair</em>
-<% if current_user && current_user.tag_pro_profile && current_user.tag_pro_profile.persisted? %>
+<% if current_user && current_user.tag_pro_profile && current_user.tag_pro_profile.persisted? && current_user.tag_pro_profile.confirmed? %>
   <% if current_user.tag_pro_profile.flairs.blank? %>
     <p>You don't have any flairs.</p>
   <% else %>

@@ -1,6 +1,9 @@
 TagProBot::Application.routes.draw do
   resource :tag_pro_profile do
     resources :flairs
+    member do
+      patch :verify
+    end
   end
 
   resource :user

@@ -1,6 +1,6 @@
 class TagProProfilesController < ApplicationController
   before_filter :authenticate_user!
-  before_action :set_tag_pro_profile, only: [:show, :edit, :update, :destroy]
+  before_action :set_tag_pro_profile, only: [:show, :edit, :update, :destroy, :verify]
 
   respond_to :html, :json
 
@@ -44,6 +44,11 @@ class TagProProfilesController < ApplicationController
   # DELETE /tag_pro_profile.json
   def destroy
     @tag_pro_profile.destroy
+    respond_with(@tag_pro_profile, location: root_url)
+  end
+
+  def verify
+    @tag_pro_profile.verify!
     respond_with(@tag_pro_profile, location: root_url)
   end
 
